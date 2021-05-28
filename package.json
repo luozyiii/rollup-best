@@ -1,0 +1,36 @@
+{
+  "name": "rollup-best",
+  "version": "1.0.0",
+  "description": "工具库、组件库开发",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rollup -wc rollup.config.dev.js",
+    "build": "rollup -c rollup.config.dev.js",
+    "build:prod": "rollup -c rollup.config.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luozyiii/rollup-best.git"
+  },
+  "keywords": [],
+  "author": "leslie <924361501@qq.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luozyiii/rollup-best/issues"
+  },
+  "homepage": "https://github.com/luozyiii/rollup-best#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "rollup": "^2.50.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sam-test-data": "^0.0.5"
+  }
+}
