@@ -7,6 +7,21 @@
 - React 用 rollup 打包
 - Vue 用 rollup 打包
 
+### 与 webpack 区别
+
+- rollup
+  简洁的 API，易上手;  
+  天生的 Tree-shaking，自动删除冗余代码;  
+  支持多模块导出;  
+  能快速打出体积更小的 bundle;  
+  适合打包类、库；
+
+- webpack
+  丰富的插件系统;  
+  代码分割和静态资源导入;  
+  热模块更新;  
+  适合项目级应用;
+
 ### 开始
 
 ```javascript
