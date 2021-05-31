@@ -88,6 +88,10 @@ import { foo } from './foo.mjs';
 console.log(foo()); // Hello foo!
 ```
 
+### 使用.prettierrc.js 格式化代码
+
+> prettierrc + vscode 自定义工作区 保持代码风格的一致
+
 ### rollup 插件
 
 - rollup-plugin-node-resolve
@@ -227,4 +231,15 @@ rollup.config.react.js;
 
 // vue 配置文件
 rollup.config.vue.js;
+```
+
+### 如何查看例子
+
+> 借助 npm 包 serve 构建服务器环境
+
+```javascript
+// 全局安装serve
+npm install -g serve
+
+serve ./
 ```
