@@ -211,7 +211,7 @@ external: ["react", "react-dom"],
 <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 
 <div id="app"></div>
-<script src="../dist/best.umd.js"></script>
+<script src="../dist/react/best.umd.js"></script>
 
 ```
 
