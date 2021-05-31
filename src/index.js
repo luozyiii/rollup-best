@@ -49,8 +49,8 @@ console.log(random());
  * yarn build
  * 观察打包后的文件 或者 node ./dist/best.es.js
  */
-// import { a, b } from "./cjs";
-// console.log("a:", a);
+// import { a, b } from './cjs';
+// console.log('a:', a);
 
 /**
  * rollup-plugin-json
@@ -72,18 +72,3 @@ console.log(random());
 //   return "c";
 // };
 // export default c;
-
-/**
- * vue 组件
- */
-// import Test from './vue/Test.vue';
-// export default function (Vue) {
-//   Vue.component(Test.name, Test);
-// }
-
-/**
- * React 组件
- */
-import Hello from './react/hello';
-const domContainer = document.querySelector('#app');
-ReactDOM.render(<Hello />, domContainer);

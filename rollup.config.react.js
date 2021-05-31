@@ -7,12 +7,15 @@ import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 
+// 处理css
+const postcss = require('rollup-plugin-postcss');
+
 // 压缩 js 代码，包括 ES6 代码压缩、删除注释
 import { terser } from 'rollup-plugin-terser';
 
-const inputPath = path.resolve(__dirname, './src/index.js');
-const outputUmdPath = path.resolve(__dirname, './dist/best.umd.js');
-const outputEsPath = path.resolve(__dirname, './dist/best.es.js');
+const inputPath = path.resolve(__dirname, './src/index.react.js');
+const outputUmdPath = path.resolve(__dirname, './dist/react/best.umd.js');
+const outputEsPath = path.resolve(__dirname, './dist/react/best.es.js');
 
 module.exports = {
   input: inputPath,
@@ -20,7 +23,11 @@ module.exports = {
     {
       file: outputUmdPath,
       format: 'umd', // umd、cjs、es
-      name: 'Best',
+      name: 'ReactBest',
+      globals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+      },
     },
     {
       file: outputEsPath,
@@ -34,7 +41,10 @@ module.exports = {
     }),
     commonjs(),
     json(),
+    postcss({
+      plugins: [],
+    }),
     terser(),
   ],
-  external: [],
+  external: ['react', 'react-dom'],
 };

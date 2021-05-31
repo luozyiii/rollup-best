@@ -214,3 +214,17 @@ external: ["react", "react-dom"],
 <script src="../dist/best.umd.js"></script>
 
 ```
+
+### 配置文件拆分
+
+```javascript
+// 基础配置文件
+rollup.config.dev.js;
+rollup.config.prod.js;
+
+// react 配置文件
+rollup.config.react.js;
+
+// vue 配置文件
+rollup.config.vue.js;
+```
