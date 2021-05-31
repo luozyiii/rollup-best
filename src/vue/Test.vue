@@ -11,7 +11,7 @@ import { computed, ref } from "vue";
 export default {
   name: "TestComponent",
   setup() {
-    const message = "hello test vue";
+    const message = "hello, this is vue Component";
     const count = ref(1);
     const doubleCount = computed(() => count.value * 2);
     const add = () => {

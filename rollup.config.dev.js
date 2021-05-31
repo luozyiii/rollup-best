@@ -24,7 +24,9 @@ module.exports = {
       format: "umd", // umd、cjs、es
       name: "Best",
       globals: {
-        vue: "vue",
+        vue: "Vue",
+        react: "React",
+        "react-dom": "ReactDOM",
       },
     },
     {
@@ -44,5 +46,5 @@ module.exports = {
       plugins: [],
     }),
   ],
-  external: ["vue"],
+  external: ["vue", "react", "react-dom"],
 };

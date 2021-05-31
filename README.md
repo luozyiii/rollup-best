@@ -42,10 +42,10 @@ umd：希望提供一个前后端跨平台的解决方案(支持 AMD 与 CommonJ
 ```javascript
 // if the module has no dependencies, the above pattern can be simplified to
 (function (root, factory) {
-  if (typeof define === "function" && define.amd) {
+  if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], factory);
-  } else if (typeof exports === "object") {
+  } else if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
@@ -67,11 +67,11 @@ cjs(CommonJS)：Node.js 中模块的事实标准是 CommonJS。 CommonJS 模块�
 ```javascript
 // foo.js
 module.exports = function () {
-  return "Hello foo!";
+  return 'Hello foo!';
 };
 
 // index.js
-var foo = require("./foo");
+var foo = require('./foo');
 console.log(foo()); // Hello foo!
 ```
 
@@ -80,11 +80,11 @@ ES 模块
 ```javascript
 // foo.mjs
 export function foo() {
-  return "Hello foo!";
+  return 'Hello foo!';
 }
 
 // index.mjs
-import { foo } from "./foo.mjs";
+import { foo } from './foo.mjs';
 console.log(foo()); // Hello foo!
 ```
 
@@ -134,7 +134,7 @@ export default c;
   > 有些场景下，虽然我们使用了 resolve 插件，但我们仍然某些库保持外部引用状态，这时我们就需要使用 external 属性，告诉 rollup.js 哪些是外部的类库，修改 rollup.js 的配置文件：
 
 ```javascript
-external: ["vue"];
+external: ['vue'];
 ```
 
 - commonjs 插件 rollup-plugin-commonjs
@@ -158,11 +158,14 @@ yarn add rollup-plugin-terser --dev
 
 ### vue 组件编译
 
+> 支持 vue 3
+
 ```javascript
 yarn add rollup-plugin-vue -D
 yarn add @vue/compiler-sfc -D
 yarn add @vue/babel-preset-jsx -D
-yarn add postcss rollup-plugin-postcss --dev
+// css
+yarn add postcss rollup-plugin-postcss -D
 yarn add sass -D
 ```
 
@@ -172,4 +175,42 @@ yarn add sass -D
 : Cannot read property 'withScopeId' of undefined
 
 // 在生成的文件 best.umd.js 找到 global.vue  将vue 改成大写 global.Vue
+
+// 最终解决方案 rollup.config.dev.js
+globals: {
+  vue: "Vue",
+},
+```
+
+### react 组件
+
+```javascript
+// babel 支持jsx
+yarn add @babel/preset-react -D
+
+// 支持 less
+yarn add less -D
+
+// .babelrc 配置
+{
+  "presets": ["@babel/preset-react", "@babel/env"],
+  "plugins": ["@babel/plugin-transform-react-jsx"]
+}
+
+// rollup.config.js
+globals: {
+  react: "React",
+  "react-dom": "ReactDOM",
+},
+
+// 剔除打包的库
+external: ["react", "react-dom"],
+
+// 在html 上引用
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+
+<div id="app"></div>
+<script src="../dist/best.umd.js"></script>
+
 ```

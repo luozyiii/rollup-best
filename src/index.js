@@ -32,21 +32,22 @@
 
 /** 全部引入，不触发tree shaking
  * b 虽然没有被使用到，但还是被打包了
+ * 运行 node ./dist/best.umd.js
  */
-// import * as data from "./plugin";
+// import * as data from "./tree-shaking/plugin";
 // console.log(data.default.random(), data.default.a);
 // export default data.default.random;
 
 /** 按需引入, 触发tree shaking
  * 不会打包 a和b; 实际上没有用到a 也会tree-shaking 掉
  */
-// import { random, a } from "./plugin";
-// console.log(random());
+import { random, a } from './tree-shaking/plugin';
+console.log(random());
 
 /**
  * rollup-plugin-commonjs
  * yarn build
- * 观察打包后的文件
+ * 观察打包后的文件 或者 node ./dist/best.es.js
  */
 // import { a, b } from "./cjs";
 // console.log("a:", a);
@@ -58,8 +59,8 @@
  * node ./dist/best.umd.js 观察结果
  */
 
-import pkg from "../package.json";
-console.log(pkg);
+// import pkg from "../package.json";
+// console.log(pkg);
 
 /**
  * rollup-plugin-babel 插件
@@ -75,7 +76,14 @@ console.log(pkg);
 /**
  * vue 组件
  */
-// import Test from "./vue/Test.vue";
+// import Test from './vue/Test.vue';
 // export default function (Vue) {
 //   Vue.component(Test.name, Test);
 // }
+
+/**
+ * React 组件
+ */
+import Hello from './react/hello';
+const domContainer = document.querySelector('#app');
+ReactDOM.render(<Hello />, domContainer);

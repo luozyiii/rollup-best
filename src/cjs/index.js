@@ -1,4 +1,4 @@
-// cjs 模块
+// cjs 模块 不会触发tree-shaking
 // const a = 1;
 // const b = 2;
 // module.exports = {
