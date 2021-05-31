@@ -1,4 +1,4 @@
-// 没有触发 tree-shaking
+/** 不触发 tree-shaking 的写法 */
 // const a = 1;
 // const b = 2;
 // function random() {
@@ -11,8 +11,7 @@
 //   random,
 // };
 
-// 触发 tree-shaking； 不建议写export default {}
-
+/** 触发 tree-shaking的写法 */
 export const a = 1;
 export const b = 2;
 export function random() {

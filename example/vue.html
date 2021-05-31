@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rollup-best example</title>
+    <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.js"></script>
+    <script src="../dist/best.umd.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{message}}
+      <test-component></test-component>
+    </div>
+    <script>
+      Vue.createApp({
+        setup() {
+          var message = "hello rollup";
+          return {
+            message,
+          };
+        },
+      })
+        .use(Best)
+        .mount("#app");
+    </script>
+  </body>
+</html>

@@ -3,6 +3,8 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import babel from "rollup-plugin-babel";
 import json from "rollup-plugin-json";
+
+// 压缩 js 代码，包括 ES6 代码压缩
 import { terser } from "rollup-plugin-terser";
 
 const inputPath = path.resolve(__dirname, "./src/index.js");

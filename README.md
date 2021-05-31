@@ -25,14 +25,68 @@
 ### 开始
 
 ```javascript
-npm init -y
+npm init -y // package.json 初始化
 
 yarn add rollup -D
-
 
 ```
 
 - umd、cjs、es 区别
+
+umd：希望提供一个前后端跨平台的解决方案(支持 AMD 与 CommonJS 模块方式)  
+实现原理：  
+先判断是否支持 Node.js 模块格式（exports 是否存在），存在则使用 Node.js 模块格式。  
+再判断是否支持 AMD（define 是否存在），存在则使用 AMD 方式加载模块。  
+前两个都不存在，则将模块公开到全局（window 或 global）。
+
+```javascript
+// if the module has no dependencies, the above pattern can be simplified to
+(function (root, factory) {
+  if (typeof define === "function" && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([], factory);
+  } else if (typeof exports === "object") {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory();
+  } else {
+    // Browser globals (root is window)
+    root.returnExports = factory();
+  }
+})(this, function () {
+  // Just return a value to define the module export.
+  // This example returns an object, but the module
+  // can return a function as the exported value.
+  return {};
+});
+```
+
+cjs(CommonJS)：Node.js 中模块的事实标准是 CommonJS。 CommonJS 模块在普通的 .js 文件中用 module.exports 进行定义，然后可以用 require() 函数在其他 .js 文件中使用
+
+```javascript
+// foo.js
+module.exports = function () {
+  return "Hello foo!";
+};
+
+// index.js
+var foo = require("./foo");
+console.log(foo()); // Hello foo!
+```
+
+ES 模块
+
+```javascript
+// foo.mjs
+export function foo() {
+  return "Hello foo!";
+}
+
+// index.mjs
+import { foo } from "./foo.mjs";
+console.log(foo()); // Hello foo!
+```
 
 ### rollup 插件
 
@@ -56,6 +110,22 @@ yarn add @babel/core --dev
 yarn add @babel/preset-env --dev
 
 // .babelrc 配置
+{
+  "presets": [["@babel/env"]]
+}
+```
+
+- rollup babel 插件
+  > ES6 转 ES5，让我们可以使用 ES6 新特性来编写代码
+
+```javascript
+yarn add rollup-plugin-babel --dev
+
+// ES6 箭头函数
+const c = () => {
+  return "c";
+};
+export default c;
 ```
 
 - tree-shaking 机制
@@ -68,15 +138,10 @@ external: ["vue"];
 ```
 
 - commonjs 插件 rollup-plugin-commonjs
+  > rollup.js 默认不支持 CommonJS 模块，这里我编写了一个 cjs.js CommonJS 模块用于测试。
 
 ```
 yarn add rollup-plugin-commonjs --dev
-```
-
-- rollup babel 插件
-
-```javascript
-yarn add rollup-plugin-babel --dev
 ```
 
 - json 插件
@@ -89,4 +154,22 @@ yarn add rollup-plugin-json --dev
 
 ```javascript
 yarn add rollup-plugin-terser --dev
+```
+
+### vue 组件编译
+
+```javascript
+yarn add rollup-plugin-vue -D
+yarn add @vue/compiler-sfc -D
+yarn add @vue/babel-preset-jsx -D
+yarn add postcss rollup-plugin-postcss --dev
+yarn add sass -D
+```
+
+- 在 html 直接引用报错
+
+```javascript
+: Cannot read property 'withScopeId' of undefined
+
+// 在生成的文件 best.umd.js 找到 global.vue  将vue 改成大写 global.Vue
 ```
